@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from './logo.svg'
+import './App.css'
+import Login from './components/Login'
+import { Route, BrowserRouter, Routes, Link, Outlet, Navigate } from 'react-router-dom'
+import Register from './components/Register'
+import Home from './components/Home/index'
+import Private from './PrivateRoutes/Private'
+import LoginRoute from './PrivateRoutes/LoginRoute'
+import Dashboard from './components/Dashboard'
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          {/* <Route  path="/home" element={<Home />} /> */}
+          <Route path="/" element={<Private />}>
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          <Route path="/" element={<LoginRoute />}>
+            <Route path="home" element={<Home />} />
+            <Route path="dashboard" element={<Dashboard />} />
+          </Route>
+          {/* <privateRoute  path="/">
+            <Route  path="login" element={<Login />} />
+            <Route  path="register" element={<Register />} />
+          </privateRoute> */}
+
+          {/* <loginRoute  path="/">
+          </loginRoute> */}
+        </Routes>
+      </BrowserRouter>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
